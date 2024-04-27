@@ -19,3 +19,9 @@ hashmap.c:46:48: error: ‘HashMap’ {aka ‘struct HashMap’} has no member n
       |                                                buckets
 Compilation failed
 a0ea424
+Sat 27 Apr 2024 07:05:02 AM UTC: 
+ hashmap.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ tests:  5|4
+total_score: 30/70
+8a6ca20
