@@ -94,9 +94,6 @@ void eraseMap(HashMap * map,  char * key) {
       return;
     }
     posicion = (posicion + 1) % map->capacity;
-  }
-  
-  
 }
 
 Pair * searchMap(HashMap * map,  char * key) {   
@@ -109,6 +106,7 @@ Pair * searchMap(HashMap * map,  char * key) {
       map->current = posicion; 
       return map->buckets[posicion];
     }
+    posicion = (posicion + 1) % map->capacity;
   }
   return NULL;
 }
