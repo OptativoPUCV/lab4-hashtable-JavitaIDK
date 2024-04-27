@@ -42,25 +42,25 @@ int is_equal(void* key1, void* key2){
 void insertMap(HashMap * map, char * key, void * value) {
   if(map == NULL || key == NULL)
     return;
-  long posicion = hash(key,map->capacity);
-  while(map->buckets[posicion] != NULL && map->buckets[posicion]->key != NULL)
+  long posicion = hash(key,map->capacity); // posición inicial pa insertar la clave-valor, función hash devuelve un valor que representa la posición en la que se debe insertar el par
+  while(map->buckets[posicion] != NULL && map->buckets[posicion]->key != NULL) //busca la posicion vacia, y si esta lleno avanza  ala siguiente
     {
-      if(is_equal(map->buckets[posicion]->key, key))
+      if(is_equal(map->buckets[posicion]->key, key)) //verifica si la clave existe
       {
-        map->buckets[posicion]->value = value;
+        map->buckets[posicion]->value = value; //actualiza el valor asociado a la clave
         return;
       }
-      posicion = (posicion + 1) % map->capacity;
+      posicion = (posicion + 1) % map->capacity; //avanza ala siguiente posicion
     }
-  if(map->size == map->capacity)
-    enlarge(map);
-  map->buckets[posicion] = createPair(key,value);
-  map->size++;
+  if(map->size == map->capacity)  //si esta lleno:
+    enlarge(map); //alarga la capacidad
+  map->buckets[posicion] = createPair(key,value); // al encontrar una posición vacia, crea un nuevo par clave-valor y lo inserta en esa posición
+  map->size++; //incrementa el tamaño dsp de crear la posicion
 }
 
-void enlarge(HashMap * map) {
-    enlarge_called = 1; //no borrar (testing purposes)
-
+void enlarge(HashMap * map) {//alarga la capacidad
+  enlarge_called = 1; //no borrar (testing purposes)
+  
 
 }
 
@@ -78,14 +78,39 @@ HashMap * createMap(long capacity) {
 }
 
 void eraseMap(HashMap * map,  char * key) {    
-
-
+  if(map == NULL || key == NULL)
+    return;
+  long posicion = hash(key, map->capacity);
+  while(map->buckets[posicion] != NULL && map->buckets[posicion]->key != NULL){
+    if (is_equal(map->buckets[posicion]->key, key)){
+      map->buckets[posicion]->key = NULL;
+      map->buckets[posicion]->value = NULL;
+      map->size--;
+      return;
+    }   
+    map->buckets[posicion]->key = NULL;
+      map->buckets[posicion]->value = NULL;
+      map->size--;
+      return;
+    }
+    posicion = (posicion + 1) % map->capacity;
+  }
+  
+  
 }
 
 Pair * searchMap(HashMap * map,  char * key) {   
-
-
+  if(map == NULL || key == NULL)
     return NULL;
+  long posicion = hash(key,map->capacity);
+  while(map->buckets[posicion] != NULL && map->buckets[posicion]->key != NULL){
+    if(is_equal(map->buckets[posicion]->key, key))
+    {
+      map->current = posicion; 
+      return map->buckets[posicion];
+    }
+  }
+  return NULL;
 }
 
 Pair * firstMap(HashMap * map) {
