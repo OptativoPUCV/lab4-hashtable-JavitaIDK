@@ -131,3 +131,14 @@ hashmap.c:116:1: error: control reaches end of non-void function [-Werror=return
 cc1: all warnings being treated as errors
 Compilation failed
 280f530
+Mon 29 Apr 2024 01:46:39 AM UTC: 
+ hashmap.c | 12 ++++++++----
+ 1 file changed, 8 insertions(+), 4 deletions(-)
+In file included from test.c:4:
+hashmap.c: In function ‘firstMap’:
+hashmap.c:120:1: error: control reaches end of non-void function [-Werror=return-type]
+  120 | }
+      | ^
+cc1: all warnings being treated as errors
+Compilation failed
+f30eab8
